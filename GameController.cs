@@ -8,6 +8,9 @@ public class GameController : MonoBehaviour {
 	public int totalScore = 0;		//合計スコアを管理
 	public int totalCatch = 0;		//合計キャッチ数
 	public int highScore;			//ハイスコア
+	public float timeCount;	//制限時間
+	private bool isTimeCount;
+	private bool isClear;
 
 	public Canvas inGameCamvas;		//UI inGame
 
@@ -23,7 +26,8 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		//HighScoreがなかったら０を入れて初期化
 		highScore =	PlayerPrefs.GetInt("HighScore", 100); 
-
+		isTimeCount = false;	//初期化
+		isClear = false;		//初期化
 		Play();						//初期ステート
 	}
 
@@ -32,6 +36,7 @@ public class GameController : MonoBehaviour {
 		switch(state){
 			//
 			case State.Play:
+				isTimeCount = true;
 				break;
 			//
 			case State.Clear:
@@ -46,7 +51,12 @@ public class GameController : MonoBehaviour {
 	}
 	
 	void Update () {
-		Debug.Log("totalScore:" + totalScore + "   totalCatch:" + totalCatch);
+		//timeカウント(clearで停止)
+		if(isTimeCount){
+			if(isClear == false){
+				timeCount -= Time.deltaTime;	//play時間の保存
+			}
+		}
 	}
 
 	void Play(){
