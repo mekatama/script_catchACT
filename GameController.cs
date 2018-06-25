@@ -10,9 +10,10 @@ public class GameController : MonoBehaviour {
 	public int highScore;			//ハイスコア
 	public float timeCount;	//制限時間
 	private bool isTimeCount;
-	private bool isClear;
+	public bool isClear;
 
 	public Canvas inGameCamvas;		//UI inGame
+	public Canvas clearCamvas;		//UI inGame
 
 	//ゲームステート
 	enum State{
@@ -28,7 +29,9 @@ public class GameController : MonoBehaviour {
 		highScore =	PlayerPrefs.GetInt("HighScore", 100); 
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
-		Play();						//初期ステート
+
+		clearCamvas.enabled = false;	//UI非表示
+		Play();							//初期ステート
 	}
 
 	void LateUpdate () {
@@ -37,9 +40,19 @@ public class GameController : MonoBehaviour {
 			//
 			case State.Play:
 				isTimeCount = true;
+			//coin判定
+			if(timeCount <= 0){
+				timeCount = 0;
+				isTimeCount = false;
+				isClear = true;
+				Clear();							//ステート変更
+			}
 				break;
 			//
 			case State.Clear:
+				clearCamvas.enabled = true;		//UI表示
+				inGameCamvas.enabled = false;	//UI非表示
+					Debug.Log("clear");
 				break;
 			//
 			case State.Result:
@@ -70,5 +83,10 @@ public class GameController : MonoBehaviour {
 	}
 	void AllClear(){
 		state = State.AllClear;
+	}
+
+	//戻るボタン用の制御関数
+	public void ButtonClicked_Title(){
+		SceneManager.LoadScene("Title");	//シーンのロード
 	}
 }
