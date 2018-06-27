@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
-	public int totalScore = 0;		//合計スコアを管理
+	public int totalScore = 0;		//お菓子ポイントを管理
 	public int totalCatch = 0;		//合計キャッチ数
-	public int highScore;			//ハイスコア
-	public float timeCount;	//制限時間
+	public int saveOkasiPoint;		//save用お菓子ポイント
+	public float timeCount;			//制限時間
 	private bool isTimeCount;
 	public bool isClear;
 
@@ -25,8 +25,8 @@ public class GameController : MonoBehaviour {
 	State state;
 
 	void Start () {
-		//HighScoreがなかったら０を入れて初期化
-		highScore =	PlayerPrefs.GetInt("HighScore", 100); 
+		//saveがなかったら０を入れて初期化
+		saveOkasiPoint = PlayerPrefs.GetInt("totalOkasi", 0); 
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
 
@@ -40,11 +40,10 @@ public class GameController : MonoBehaviour {
 			//
 			case State.Play:
 				isTimeCount = true;
-			//coin判定
+			//time判定
 			if(timeCount <= 0){
 				timeCount = 0;
 				isTimeCount = false;
-				isClear = true;
 				Clear();							//ステート変更
 			}
 				break;
@@ -52,7 +51,11 @@ public class GameController : MonoBehaviour {
 			case State.Clear:
 				clearCamvas.enabled = true;		//UI表示
 				inGameCamvas.enabled = false;	//UI非表示
+				//一回だけ処理
+				if(!isClear){
+					HighScore();
 					Debug.Log("clear");
+				}
 				break;
 			//
 			case State.Result:
@@ -66,9 +69,7 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		//timeカウント(clearで停止)
 		if(isTimeCount){
-			if(isClear == false){
-				timeCount -= Time.deltaTime;	//play時間の保存
-			}
+			timeCount -= Time.deltaTime;	//play時間の保存
 		}
 	}
 
@@ -83,6 +84,14 @@ public class GameController : MonoBehaviour {
 	}
 	void AllClear(){
 		state = State.AllClear;
+	}
+
+	//shop用ポイントの計算
+	void HighScore(){
+		saveOkasiPoint = saveOkasiPoint + totalScore;		//shop用point加算
+		PlayerPrefs.SetInt("totalOkasi", saveOkasiPoint);	//save
+		isClear = true;
+		Debug.Log("shop okasi point : " + PlayerPrefs.GetInt("totalOkasi"));
 	}
 
 	//戻るボタン用の制御関数
