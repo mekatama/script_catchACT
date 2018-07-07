@@ -7,13 +7,16 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 	public int totalScore = 0;		//お菓子ポイントを管理
 	public int totalCatch = 0;		//合計キャッチ数
-	public int saveOkasiPoint;		//save用お菓子ポイント
+	private int saveOkasiPoint;		//save用お菓子ポイント
 	public float timeCount;			//制限時間
 	private bool isTimeCount;
 	public bool isClear;
 
 	public Canvas inGameCamvas;		//UI inGame
 	public Canvas clearCamvas;		//UI inGame
+
+	private float savePlayerSpeedItem;	//
+	public float playerSpeedItem;	//shopで購入
 
 	//ゲームステート
 	enum State{
@@ -27,8 +30,11 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		//saveがなかったら０を入れて初期化
 		saveOkasiPoint = PlayerPrefs.GetInt("totalOkasi", 0); 
+		savePlayerSpeedItem = PlayerPrefs.GetFloat("playerSpeedItem", 0); 
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
+		//itemパラメーター反映
+		playerSpeedItem = savePlayerSpeedItem;
 
 		clearCamvas.enabled = false;	//UI非表示
 		Play();							//初期ステート
