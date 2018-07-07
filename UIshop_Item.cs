@@ -9,8 +9,12 @@ public class UIshop_Item : MonoBehaviour {
 	public Text[] itemNameText;		//Textコンポーネント取得用
 	public int[] itemPoint;			//Itemの価格
 	public Text[] itemPointText;	//Textコンポーネント取得用
+	private float savePlayerSpeedItem;	//
+	public float itemSpeed;
 
 	void Start () {
+		//saveがなかったら０を入れて初期化
+		savePlayerSpeedItem = PlayerPrefs.GetFloat("playerSpeedItem", 0); 
 	}
 
 	void Update () {
@@ -27,6 +31,10 @@ public class UIshop_Item : MonoBehaviour {
 		tempSave = tempSave - itemPoint[0];
 		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 		Debug.Log("item 1 buy : " + itemPoint[0]);
+		//強化内容
+		savePlayerSpeedItem = savePlayerSpeedItem + itemSpeed;			//加算
+		PlayerPrefs.SetFloat("playerSpeedItem", savePlayerSpeedItem);	//save
+		Debug.Log("speed item : " + PlayerPrefs.GetFloat("playerSpeedItem"));
 	}
 	//shop item用のbutton制御関数
 	public void ButtonClicked_Item2(){
