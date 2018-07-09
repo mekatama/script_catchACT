@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 		//地上にいる時の処理
 		if(characterController.isGrounded){
 			//【ボタン移動したい時は、コメントアウトする】
-			 moveX = Input.GetAxis ("Horizontal") * speedX;	//左右入力でx方向のベクトル出す
+			 moveX = Input.GetAxis ("Horizontal") * (speedX + gc.playerSpeedItem);	//左右入力でx方向のベクトル出す
 			 velocity.x = moveX;							//最終的な速度ベクトルに代入
 		}
 		//地上にいない時
@@ -39,11 +39,15 @@ public class Player : MonoBehaviour {
 	}
 
 	public void moveLeft(){
-		velocity.x = speedX * -1;							//最終的な速度ベクトルに代入
+		//gcって仮の変数にGameControllerのコンポーネントを入れる
+		GameController gc = gameController.GetComponent<GameController>();
+		velocity.x = (speedX + gc.playerSpeedItem) * -1;	//最終的な速度ベクトルに代入
 	}
 
 	public void moveRight(){
-		velocity.x = speedX;							//最終的な速度ベクトルに代入
+		//gcって仮の変数にGameControllerのコンポーネントを入れる
+		GameController gc = gameController.GetComponent<GameController>();
+		velocity.x = (speedX + gc.playerSpeedItem);			//最終的な速度ベクトルに代入
 	}
 
 	public void moveStop(){
