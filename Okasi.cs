@@ -6,7 +6,7 @@ public class Okasi : MonoBehaviour {
 	public int okasiScore;				//okasiスコア
 	public float okasiSpeed = -0.05f;	//1秒間に弾が進む距離
 	GameObject gameController;			//検索したオブジェクト入れる用
-//	GameObject playey;					//検索したオブジェクト入れる用
+//	GameObject player;					//検索したオブジェクト入れる用
 
 	void Start(){
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
