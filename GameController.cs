@@ -16,7 +16,9 @@ public class GameController : MonoBehaviour {
 	public Canvas clearCamvas;		//UI inGame
 
 	private float savePlayerSpeedItem;	//
+	private int saveKagoScaleItemNum;	//
 	public float playerSpeedItem;	//shopで購入
+	public float playerKagoScale;	//shopで購入
 
 	//ゲームステート
 	enum State{
@@ -31,6 +33,8 @@ public class GameController : MonoBehaviour {
 		//saveがなかったら０を入れて初期化
 		saveOkasiPoint = PlayerPrefs.GetInt("totalOkasi", 0); 
 		savePlayerSpeedItem = PlayerPrefs.GetFloat("playerSpeedItem", 0); 
+		saveKagoScaleItemNum = PlayerPrefs.GetInt("kagoScaleItemNum", 0); 
+		//
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
 		//itemパラメーター反映
