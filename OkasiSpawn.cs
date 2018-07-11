@@ -29,13 +29,15 @@ public class OkasiSpawn : MonoBehaviour {
 		//gcって仮の変数にGameControllerのコンポーネントを入れる
 		GameController gc = gameController.GetComponent<GameController>();
 
-		if(!gc.isClear){
-			//okasiを生成する
-			GameObject okasi = (GameObject)Instantiate(
-				okasiObject[okasiType],						//■仮で0を入れている。0～4を想定
-				new Vector3(x_pos, transform.position.y, transform.position.z),
-				transform.rotation
-			);
+		if(gc.isTimeCount){
+			if(!gc.isClear){
+				//okasiを生成する
+				GameObject okasi = (GameObject)Instantiate(
+					okasiObject[okasiType],						//■仮で0を入れている。0～4を想定
+					new Vector3(x_pos, transform.position.y, transform.position.z),
+					transform.rotation
+				);
+			}
 		}
 		timeElapsed = 0.0f;			//生成時間リセット
 	}
