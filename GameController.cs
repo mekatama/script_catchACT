@@ -9,9 +9,10 @@ public class GameController : MonoBehaviour {
 	public int totalCatch = 0;		//合計キャッチ数
 	private int saveOkasiPoint;		//save用お菓子ポイント
 	public float timeCount;			//制限時間
-	private bool isTimeCount;
+	public bool isTimeCount;
 	public bool isClear;
 
+	public Canvas itemSelectCamvas;	//UI itemSelect
 	public Canvas inGameCamvas;		//UI inGame
 	public Canvas clearCamvas;		//UI inGame
 
@@ -22,6 +23,7 @@ public class GameController : MonoBehaviour {
 
 	//ゲームステート
 	enum State{
+		ItemSelect,	//
 		Play,		//inGame
 		Clear,		//
 		Result,		//
@@ -40,15 +42,20 @@ public class GameController : MonoBehaviour {
 		//itemパラメーター反映
 		playerSpeedItem = savePlayerSpeedItem;
 
+		inGameCamvas.enabled = false;	//UI非表示
 		clearCamvas.enabled = false;	//UI非表示
-		Play();							//初期ステート
+		ItemSelect();							//初期ステート
 	}
 
 	void LateUpdate () {
 		//ステートの制御
 		switch(state){
+			case State.ItemSelect:
+				break;
 			//
 			case State.Play:
+				inGameCamvas.enabled = true;		//UI表示
+				itemSelectCamvas.enabled = false;	//UI非表示
 				isTimeCount = true;
 			//time判定
 			if(timeCount <= 0){
@@ -83,6 +90,9 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	void ItemSelect(){
+		state = State.ItemSelect;
+	}
 	void Play(){
 		state = State.Play;
 	}
@@ -104,6 +114,10 @@ public class GameController : MonoBehaviour {
 		Debug.Log("shop okasi point : " + PlayerPrefs.GetInt("totalOkasi"));
 	}
 
+	//okボタン用の制御関数
+	public void ButtonClicked_game(){
+		Play();							//ステート変更
+	}
 	//戻るボタン用の制御関数
 	public void ButtonClicked_Title(){
 		SceneManager.LoadScene("Title");	//シーンのロード
