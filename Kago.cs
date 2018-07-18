@@ -7,13 +7,13 @@ public class Kago : MonoBehaviour {
 
 	void Start () {
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
-		//gcって仮の変数にGameControllerのコンポーネントを入れる
-		GameController gc = gameController.GetComponent<GameController>();
-		//kagoの大きさ設定
-		this.transform.localScale = new Vector3(gc.playerKagoScale, 0.1f, 1);
 	}
 	
 	void Update () {
-		
+		//gcって仮の変数にGameControllerのコンポーネントを入れる
+		GameController gc = gameController.GetComponent<GameController>();
+		Debug.Log("kago scale : " + gc.playerKagoScale);
+		//kagoの大きさ設定
+		this.transform.localScale = new Vector3(gc.playerKagoScale, 0.1f, 1);
 	}
 }
