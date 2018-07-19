@@ -10,12 +10,14 @@ public class UIshop_Item : MonoBehaviour {
 	public int[] itemPoint;			//Itemの価格
 	public Text[] itemPointText;	//Textコンポーネント取得用
 	private float savePlayerSpeedItem;	//saveデータ一時保存用
+	private int savePlayerSpeedItemNum;	//saveデータ一時保存用
 	private int saveKagoScaleItemNum;	//saveデータ一時保存用
 	public float itemSpeed;			//アイテムのspeedUp値
 
 	void Start () {
 		//saveがなかったら０を入れて初期化
 		savePlayerSpeedItem = PlayerPrefs.GetFloat("playerSpeedItem", 0); 	
+		savePlayerSpeedItemNum = PlayerPrefs.GetInt("playerSpeedItemNum", 0); 
 		saveKagoScaleItemNum = PlayerPrefs.GetInt("kagoScaleItemNum", 0); 
 	}
 
@@ -34,9 +36,11 @@ public class UIshop_Item : MonoBehaviour {
 		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 		Debug.Log("item 1 buy : " + itemPoint[0]);
 		//強化内容
-		savePlayerSpeedItem = savePlayerSpeedItem + itemSpeed;			//加算
-		PlayerPrefs.SetFloat("playerSpeedItem", savePlayerSpeedItem);	//save
-		Debug.Log("speed item : " + PlayerPrefs.GetFloat("playerSpeedItem"));
+		savePlayerSpeedItem = itemSpeed;									//set
+		savePlayerSpeedItemNum = savePlayerSpeedItemNum + 1;				//加算
+		PlayerPrefs.SetInt("playerSpeedItemNum", savePlayerSpeedItemNum);	//save
+		PlayerPrefs.SetFloat("playerSpeedItem", savePlayerSpeedItem);		//save
+		Debug.Log("speed item : " + PlayerPrefs.GetInt("playerSpeedItemNum"));
 	}
 	//籠大きくする item用のbutton制御関数
 	public void ButtonClicked_Item2(){
