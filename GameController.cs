@@ -14,7 +14,9 @@ public class GameController : MonoBehaviour {
 
 	public Canvas itemSelectCamvas;	//UI itemSelect
 	public Canvas inGameCamvas;		//UI inGame
-	public Canvas clearCamvas;		//UI inGame
+	public Canvas clearCamvas;		//UI clear
+	public Canvas item0Camvas;		//UI item0 speedup
+	public Canvas item1Camvas;		//UI item1 speedup
 	public Toggle toggleItem0;		//toggle
 	public Toggle toggleItem1;		//toggle
 
@@ -47,6 +49,8 @@ public class GameController : MonoBehaviour {
 
 		inGameCamvas.enabled = false;	//UI非表示
 		clearCamvas.enabled = false;	//UI非表示
+		item0Camvas.enabled = false;	//UI非表示
+		item1Camvas.enabled = false;	//UI非表示
 		ItemSelect();							//初期ステート
 	}
 
@@ -132,9 +136,11 @@ public class GameController : MonoBehaviour {
 		if(toggleItem0.isOn){
 			savePlayerSpeedItemNum = savePlayerSpeedItemNum - 1;	//使用で減らす
 			playerSpeedItem = savePlayerSpeedItem;
+			item0Camvas.enabled = true;		//UI表示
 		}else{
 			savePlayerSpeedItemNum = savePlayerSpeedItemNum + 1;	//戻す
 			playerSpeedItem = 0.0f;
+			item0Camvas.enabled = false;	//UI非表示
 		}
 		PlayerPrefs.SetInt("playerSpeedItemNum", savePlayerSpeedItemNum);	//save
 		Debug.Log("speed item : " + PlayerPrefs.GetInt("playerSpeedItemNum"));
@@ -145,9 +151,11 @@ public class GameController : MonoBehaviour {
 		if(toggleItem1.isOn){
 			saveKagoScaleItemNum = saveKagoScaleItemNum - 1;	//使用で減らす
 			playerKagoScale = 2.0f;
+			item1Camvas.enabled = true;		//UI表示
 		}else{
 			saveKagoScaleItemNum = saveKagoScaleItemNum + 1;	//戻す
 			playerKagoScale = 1.0f;
+			item1Camvas.enabled = false;	//UI非表示
 		}
 		PlayerPrefs.SetInt("kagoScaleItemNum", saveKagoScaleItemNum);	//save
 		Debug.Log("scale item : " + PlayerPrefs.GetInt("kagoScaleItemNum"));
