@@ -15,11 +15,15 @@ public class GameController : MonoBehaviour {
 	public Canvas itemSelectCamvas;	//UI itemSelect
 	public Canvas inGameCamvas;		//UI inGame
 	public Canvas clearCamvas;		//UI inGame
+	public Toggle toggleItem0;		//toggle
+	public Toggle toggleItem1;		//toggle
 
-	private float savePlayerSpeedItem;	//
-	private int saveKagoScaleItemNum;	//
-	public float playerSpeedItem;	//shopで購入
-	public float playerKagoScale;	//shopで購入
+	private float savePlayerSpeedItem;		//一時保存用
+	private int savePlayerSpeedItemNum;		//一時保存用
+	private int saveKagoScaleItemNum;		//一時保存用
+	public float playerSpeedItem;			//shopで購入
+	public float playerKagoScale;			//shopで購入
+
 
 	//ゲームステート
 	enum State{
@@ -34,13 +38,12 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		//saveがなかったら０を入れて初期化
 		saveOkasiPoint = PlayerPrefs.GetInt("totalOkasi", 0); 
+		savePlayerSpeedItemNum = PlayerPrefs.GetInt("playerSpeedItemNum", 0); 
 		savePlayerSpeedItem = PlayerPrefs.GetFloat("playerSpeedItem", 0); 
 		saveKagoScaleItemNum = PlayerPrefs.GetInt("kagoScaleItemNum", 0); 
 		//
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
-		//itemパラメーター反映
-		playerSpeedItem = savePlayerSpeedItem;
 
 		inGameCamvas.enabled = false;	//UI非表示
 		clearCamvas.enabled = false;	//UI非表示
@@ -121,5 +124,32 @@ public class GameController : MonoBehaviour {
 	//戻るボタン用の制御関数
 	public void ButtonClicked_Title(){
 		SceneManager.LoadScene("Title");	//シーンのロード
+	}
+
+	//アイテムセレクト処理
+	//speedup item
+	public void ToggleItem0()	{
+		if(toggleItem0.isOn){
+			savePlayerSpeedItemNum = savePlayerSpeedItemNum - 1;	//使用で減らす
+			playerSpeedItem = savePlayerSpeedItem;
+		}else{
+			savePlayerSpeedItemNum = savePlayerSpeedItemNum + 1;	//戻す
+			playerSpeedItem = 0.0f;
+		}
+		PlayerPrefs.SetInt("playerSpeedItemNum", savePlayerSpeedItemNum);	//save
+		Debug.Log("speed item : " + PlayerPrefs.GetInt("playerSpeedItemNum"));
+	}
+
+	//籠大きくitem
+	public void ToggleItem1()	{
+		if(toggleItem1.isOn){
+			saveKagoScaleItemNum = saveKagoScaleItemNum - 1;	//使用で減らす
+			playerKagoScale = 2.0f;
+		}else{
+			saveKagoScaleItemNum = saveKagoScaleItemNum + 1;	//戻す
+			playerKagoScale = 1.0f;
+		}
+		PlayerPrefs.SetInt("kagoScaleItemNum", saveKagoScaleItemNum);	//save
+		Debug.Log("scale item : " + PlayerPrefs.GetInt("kagoScaleItemNum"));
 	}
 }
