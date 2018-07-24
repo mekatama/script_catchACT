@@ -26,7 +26,7 @@ public class Okasi : MonoBehaviour {
 		if(other.tag == "kago"){
 			//gcって仮の変数にGameControllerのコンポーネントを入れる
 			GameController gc = gameController.GetComponent<GameController>();
-			gc.totalScore = gc.totalScore + okasiScore;	//スコア加算
+			gc.totalScore = gc.totalScore + (okasiScore * gc.playerPointUp);	//スコア加算/point up値
 			gc.totalCatch += 1;							//キャッチ数加算
 			//このGameObjectを［Hierrchy］ビューから削除する
 			Destroy(gameObject);
