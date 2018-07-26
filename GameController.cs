@@ -18,17 +18,21 @@ public class GameController : MonoBehaviour {
 	public Canvas item0Camvas;		//UI item0 speedup
 	public Canvas item1Camvas;		//UI item1 speedup
 	public Canvas item2Camvas;		//UI item1 speedup
+	public Canvas item3Camvas;		//UI item1 speedup
 	public Toggle toggleItem0;		//toggle
 	public Toggle toggleItem1;		//toggle
 	public Toggle toggleItem2;		//toggle
+	public Toggle toggleItem3;		//toggle
 
 	private float savePlayerSpeedItem;		//一時保存用
 	private int savePlayerSpeedItemNum;		//一時保存用
 	private int saveKagoScaleItemNum;		//一時保存用
 	private int savePointUpItemNum;			//一時保存用
+	private int saveTimeExtendItemNum;		//一時保存用
 	public float playerSpeedItem;			//shopで購入
 	public float playerKagoScale;			//shopで購入
 	public int playerPointUp;				//shopで購入
+	public float playerTimeExtend;			//shopで購入
 
 
 	//ゲームステート
@@ -48,6 +52,7 @@ public class GameController : MonoBehaviour {
 		savePlayerSpeedItem = PlayerPrefs.GetFloat("playerSpeedItem", 0); 
 		saveKagoScaleItemNum = PlayerPrefs.GetInt("kagoScaleItemNum", 0); 
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
+		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
 		//
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
@@ -57,6 +62,7 @@ public class GameController : MonoBehaviour {
 		item0Camvas.enabled = false;	//UI非表示
 		item1Camvas.enabled = false;	//UI非表示
 		item2Camvas.enabled = false;	//UI非表示
+		item3Camvas.enabled = false;	//UI非表示
 		ItemSelect();							//初期ステート
 	}
 
@@ -107,6 +113,7 @@ public class GameController : MonoBehaviour {
 		state = State.ItemSelect;
 	}
 	void Play(){
+		timeCount = timeCount + playerTimeExtend;	//item反映
 		state = State.Play;
 	}
 	void Clear(){
@@ -180,5 +187,20 @@ public class GameController : MonoBehaviour {
 		}
 		PlayerPrefs.SetInt("pointUpItemNum", savePointUpItemNum);	//save
 		Debug.Log("point up item : " + PlayerPrefs.GetInt("pointUpItemNum") + " : " + playerPointUp);
+	}
+
+	//time extend item
+	public void ToggleItem3()	{
+		if(toggleItem3.isOn){
+			saveTimeExtendItemNum = saveTimeExtendItemNum - 1;	//使用で減らす
+			playerTimeExtend = 10.0f;
+			item3Camvas.enabled = true;		//UI表示
+		}else{
+			saveTimeExtendItemNum = saveTimeExtendItemNum + 1;	//戻す
+			playerTimeExtend = 0.0f;
+			item3Camvas.enabled = false;	//UI非表示
+		}
+		PlayerPrefs.SetInt("timeExtendItemNum", saveTimeExtendItemNum);	//save
+		Debug.Log("TimeExtend item : " + PlayerPrefs.GetInt("timeExtendItemNum") + " : " + playerTimeExtend);
 	}
 }

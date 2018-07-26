@@ -13,7 +13,9 @@ public class UIshop_Item : MonoBehaviour {
 	private int savePlayerSpeedItemNum;	//saveデータ一時保存用
 	private int saveKagoScaleItemNum;	//saveデータ一時保存用
 	private int savePointUpItemNum;		//saveデータ一時保存用
-	public float itemSpeed;			//アイテムのspeedUp値
+	private int saveTimeExtendItemNum;	//saveデータ一時保存用
+	private int saveNoOjyamaItemNum;	//saveデータ一時保存用
+	public float itemSpeed;				//アイテムのspeedUp値
 
 	void Start () {
 		//saveがなかったら０を入れて初期化
@@ -21,6 +23,8 @@ public class UIshop_Item : MonoBehaviour {
 		savePlayerSpeedItemNum = PlayerPrefs.GetInt("playerSpeedItemNum", 0); 
 		saveKagoScaleItemNum = PlayerPrefs.GetInt("kagoScaleItemNum", 0); 
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
+		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
+		saveNoOjyamaItemNum = PlayerPrefs.GetInt("noOjyamaItemNum", 0); 
 	}
 
 	void Update () {
@@ -55,7 +59,7 @@ public class UIshop_Item : MonoBehaviour {
 		PlayerPrefs.SetInt("kagoScaleItemNum", saveKagoScaleItemNum);	//save
 		Debug.Log("scale item : " + PlayerPrefs.GetInt("kagoScaleItemNum"));
 	}
-	//shop item用のbutton制御関数
+	//pointUp item用のbutton制御関数
 	public void ButtonClicked_Item3(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
 		tempSave = tempSave - itemPoint[2];
@@ -66,11 +70,15 @@ public class UIshop_Item : MonoBehaviour {
 		PlayerPrefs.SetInt("pointUpItemNum", savePointUpItemNum);	//save
 		Debug.Log("point item : " + PlayerPrefs.GetInt("pointUpItemNum"));
 	}
-	//shop item用のbutton制御関数
+	//時間延長 item用のbutton制御関数
 	public void ButtonClicked_Item4(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
 		tempSave = tempSave - itemPoint[3];
 		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
+		//強化内容
+		saveTimeExtendItemNum = saveTimeExtendItemNum + 1;				//加算
+		PlayerPrefs.SetInt("timeExtendItemNum", saveTimeExtendItemNum);	//save
+		Debug.Log("timeextend item : " + PlayerPrefs.GetInt("timeExtendItemNum"));
 		Debug.Log("item 4 buy : " + itemPoint[3]);
 	}
 	//shop item用のbutton制御関数
@@ -79,6 +87,11 @@ public class UIshop_Item : MonoBehaviour {
 		tempSave = tempSave - itemPoint[4];
 		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 		Debug.Log("item 5 buy : " + itemPoint[4]);
+		//強化内容
+		saveNoOjyamaItemNum = saveNoOjyamaItemNum + 1;				//加算
+		PlayerPrefs.SetInt("noOjyamaItemNum", saveNoOjyamaItemNum);	//save
+		Debug.Log("NoOjyama item : " + PlayerPrefs.GetInt("noOjyamaItemNum"));
+		Debug.Log("item 4 buy : " + itemPoint[3]);
 	}
 	//shop item用のbutton制御関数
 	public void ButtonClicked_Item6(){

@@ -12,6 +12,7 @@ public class UI_ItemSelect : MonoBehaviour {
 	private int savePlayerSpeedItemNum;	//saveデータ一時保存用
 	private int saveKagoScaleItemNum;	//saveデータ一時保存用
 	private int savePointUpItemNum;		//saveデータ一時保存用
+	private int saveTimeExtendItemNum;	//saveデータ一時保存用
 
 	void Start () {
 		//saveがなかったら０を入れて初期化
@@ -19,18 +20,21 @@ public class UI_ItemSelect : MonoBehaviour {
 		savePlayerSpeedItemNum = PlayerPrefs.GetInt("playerSpeedItemNum", 0); 	
 		saveKagoScaleItemNum = PlayerPrefs.GetInt("kagoScaleItemNum", 0); 
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
+		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
 	}
 	
 	void Update () {
 		savePlayerSpeedItemNum = PlayerPrefs.GetInt("playerSpeedItemNum", 0); 	
 		saveKagoScaleItemNum = PlayerPrefs.GetInt("kagoScaleItemNum", 0); 
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
+		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
 		//アイテム名と個数の表示
 		for(int i = 0; i < itemName.Length; i++) {
 			itemNameText[i].text = itemName[i];
 			itemNumText[0].text = savePlayerSpeedItemNum.ToString("000");
 			itemNumText[1].text = saveKagoScaleItemNum.ToString("000");
 			itemNumText[2].text = savePointUpItemNum.ToString("000");
+			itemNumText[3].text = saveTimeExtendItemNum.ToString("000");
 //			itemNumText[i].text = itemNum[i].ToString("000");
 		}
 	}
