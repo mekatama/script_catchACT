@@ -17,22 +17,26 @@ public class GameController : MonoBehaviour {
 	public Canvas clearCamvas;		//UI clear
 	public Canvas item0Camvas;		//UI item0 speedup
 	public Canvas item1Camvas;		//UI item1 speedup
-	public Canvas item2Camvas;		//UI item1 speedup
-	public Canvas item3Camvas;		//UI item1 speedup
+	public Canvas item2Camvas;		//UI item2 speedup
+	public Canvas item3Camvas;		//UI item3 speedup
+	public Canvas item4Camvas;		//UI item4 speedup
 	public Toggle toggleItem0;		//toggle
 	public Toggle toggleItem1;		//toggle
 	public Toggle toggleItem2;		//toggle
 	public Toggle toggleItem3;		//toggle
+	public Toggle toggleItem4;		//toggle
 
 	private float savePlayerSpeedItem;		//一時保存用
 	private int savePlayerSpeedItemNum;		//一時保存用
 	private int saveKagoScaleItemNum;		//一時保存用
 	private int savePointUpItemNum;			//一時保存用
 	private int saveTimeExtendItemNum;		//一時保存用
+	private int saveNoOjyamaItemNum;			//一時保存用
 	public float playerSpeedItem;			//shopで購入
 	public float playerKagoScale;			//shopで購入
 	public int playerPointUp;				//shopで購入
 	public float playerTimeExtend;			//shopで購入
+	public bool playerNoOjyama;				//shopで購入
 
 
 	//ゲームステート
@@ -53,6 +57,7 @@ public class GameController : MonoBehaviour {
 		saveKagoScaleItemNum = PlayerPrefs.GetInt("kagoScaleItemNum", 0); 
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
 		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
+		saveNoOjyamaItemNum = PlayerPrefs.GetInt("noOjyamaItemNum", 0); 
 		//
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
@@ -63,6 +68,7 @@ public class GameController : MonoBehaviour {
 		item1Camvas.enabled = false;	//UI非表示
 		item2Camvas.enabled = false;	//UI非表示
 		item3Camvas.enabled = false;	//UI非表示
+		item4Camvas.enabled = false;	//UI非表示
 		ItemSelect();							//初期ステート
 	}
 
@@ -202,5 +208,20 @@ public class GameController : MonoBehaviour {
 		}
 		PlayerPrefs.SetInt("timeExtendItemNum", saveTimeExtendItemNum);	//save
 		Debug.Log("TimeExtend item : " + PlayerPrefs.GetInt("timeExtendItemNum") + " : " + playerTimeExtend);
+	}
+
+	//No Ojyama item
+	public void ToggleItem4()	{
+		if(toggleItem4.isOn){
+			saveNoOjyamaItemNum = saveNoOjyamaItemNum - 1;	//使用で減らす
+			playerNoOjyama = true;
+			item4Camvas.enabled = true;		//UI表示
+		}else{
+			saveNoOjyamaItemNum = saveNoOjyamaItemNum + 1;	//戻す
+			playerNoOjyama = false;
+			item4Camvas.enabled = false;	//UI非表示
+		}
+		PlayerPrefs.SetInt("noOjyamaItemNum", saveNoOjyamaItemNum);	//save
+		Debug.Log("NoOjyama item : " + PlayerPrefs.GetInt("noOjyamaItemNum") + " : " + playerNoOjyama);
 	}
 }

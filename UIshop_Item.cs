@@ -81,17 +81,16 @@ public class UIshop_Item : MonoBehaviour {
 		Debug.Log("timeextend item : " + PlayerPrefs.GetInt("timeExtendItemNum"));
 		Debug.Log("item 4 buy : " + itemPoint[3]);
 	}
-	//shop item用のbutton制御関数
+	//NoOjyama item用のbutton制御関数
 	public void ButtonClicked_Item5(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
 		tempSave = tempSave - itemPoint[4];
 		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
-		Debug.Log("item 5 buy : " + itemPoint[4]);
 		//強化内容
 		saveNoOjyamaItemNum = saveNoOjyamaItemNum + 1;				//加算
 		PlayerPrefs.SetInt("noOjyamaItemNum", saveNoOjyamaItemNum);	//save
 		Debug.Log("NoOjyama item : " + PlayerPrefs.GetInt("noOjyamaItemNum"));
-		Debug.Log("item 4 buy : " + itemPoint[3]);
+		Debug.Log("item 5 buy : " + itemPoint[4]);
 	}
 	//shop item用のbutton制御関数
 	public void ButtonClicked_Item6(){
