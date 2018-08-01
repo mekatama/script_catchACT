@@ -38,65 +38,89 @@ public class UIshop_Item : MonoBehaviour {
 	//speedUp item用のbutton制御関数
 	public void ButtonClicked_Item1(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		tempSave = tempSave - itemPoint[0];
-		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
-		Debug.Log("item 1 buy : " + itemPoint[0]);
-		//強化内容
-		savePlayerSpeedItem = itemSpeed;									//set
-		savePlayerSpeedItemNum = savePlayerSpeedItemNum + 1;				//加算
-		PlayerPrefs.SetInt("playerSpeedItemNum", savePlayerSpeedItemNum);	//save
-		PlayerPrefs.SetFloat("playerSpeedItem", savePlayerSpeedItem);		//save
-		Debug.Log("speed item : " + PlayerPrefs.GetInt("playerSpeedItemNum"));
+		if(tempSave > itemPoint[0]){
+			tempSave = tempSave - itemPoint[0];
+			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
+			//強化内容
+			savePlayerSpeedItem = itemSpeed;									//set
+			savePlayerSpeedItemNum = savePlayerSpeedItemNum + 1;				//加算
+			PlayerPrefs.SetInt("playerSpeedItemNum", savePlayerSpeedItemNum);	//save
+			PlayerPrefs.SetFloat("playerSpeedItem", savePlayerSpeedItem);		//save
+			Debug.Log("speed item : " + PlayerPrefs.GetInt("playerSpeedItemNum"));
+			Debug.Log("item 1 buy : " + itemPoint[0]);
+		}else{
+			Debug.Log("don't buy");
+		}
 	}
 	//籠大きくする item用のbutton制御関数
 	public void ButtonClicked_Item2(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		tempSave = tempSave - itemPoint[1];
-		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
-		Debug.Log("item 2 buy : " + itemPoint[1]);
-		//強化内容
-		saveKagoScaleItemNum = saveKagoScaleItemNum + 1;				//加算
-		PlayerPrefs.SetInt("kagoScaleItemNum", saveKagoScaleItemNum);	//save
-		Debug.Log("scale item : " + PlayerPrefs.GetInt("kagoScaleItemNum"));
+		if(tempSave > itemPoint[1]){
+			tempSave = tempSave - itemPoint[1];
+			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
+			//強化内容
+			saveKagoScaleItemNum = saveKagoScaleItemNum + 1;				//加算
+			PlayerPrefs.SetInt("kagoScaleItemNum", saveKagoScaleItemNum);	//save
+			Debug.Log("scale item : " + PlayerPrefs.GetInt("kagoScaleItemNum"));
+			Debug.Log("item 2 buy : " + itemPoint[1]);
+		}else{
+			Debug.Log("don't buy");
+		}
 	}
 	//pointUp item用のbutton制御関数
 	public void ButtonClicked_Item3(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		tempSave = tempSave - itemPoint[2];
-		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
-		Debug.Log("item 3 buy : " + itemPoint[2]);
-		//強化内容
-		savePointUpItemNum = savePointUpItemNum + 1;				//加算
-		PlayerPrefs.SetInt("pointUpItemNum", savePointUpItemNum);	//save
-		Debug.Log("point item : " + PlayerPrefs.GetInt("pointUpItemNum"));
+		if(tempSave > itemPoint[2]){
+			tempSave = tempSave - itemPoint[2];
+			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
+			//強化内容
+			savePointUpItemNum = savePointUpItemNum + 1;				//加算
+			PlayerPrefs.SetInt("pointUpItemNum", savePointUpItemNum);	//save
+			Debug.Log("point item : " + PlayerPrefs.GetInt("pointUpItemNum"));
+			Debug.Log("item 3 buy : " + itemPoint[2]);
+		}else{
+			Debug.Log("don't buy");
+		}
 	}
 	//時間延長 item用のbutton制御関数
 	public void ButtonClicked_Item4(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		tempSave = tempSave - itemPoint[3];
-		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
-		//強化内容
-		saveTimeExtendItemNum = saveTimeExtendItemNum + 1;				//加算
-		PlayerPrefs.SetInt("timeExtendItemNum", saveTimeExtendItemNum);	//save
-		Debug.Log("timeextend item : " + PlayerPrefs.GetInt("timeExtendItemNum"));
-		Debug.Log("item 4 buy : " + itemPoint[3]);
+		if(tempSave > itemPoint[3]){
+			tempSave = tempSave - itemPoint[3];
+			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
+			//強化内容
+			saveTimeExtendItemNum = saveTimeExtendItemNum + 1;				//加算
+			PlayerPrefs.SetInt("timeExtendItemNum", saveTimeExtendItemNum);	//save
+			Debug.Log("timeextend item : " + PlayerPrefs.GetInt("timeExtendItemNum"));
+			Debug.Log("item 4 buy : " + itemPoint[3]);
+		}else{
+			Debug.Log("don't buy");
+		}
 	}
 	//NoOjyama item用のbutton制御関数
 	public void ButtonClicked_Item5(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		tempSave = tempSave - itemPoint[4];
-		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
-		//強化内容
-		saveNoOjyamaItemNum = saveNoOjyamaItemNum + 1;				//加算
-		PlayerPrefs.SetInt("noOjyamaItemNum", saveNoOjyamaItemNum);	//save
-		Debug.Log("NoOjyama item : " + PlayerPrefs.GetInt("noOjyamaItemNum"));
-		Debug.Log("item 5 buy : " + itemPoint[4]);
+		if(tempSave > itemPoint[4]){
+			tempSave = tempSave - itemPoint[4];
+			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
+			//強化内容
+			saveNoOjyamaItemNum = saveNoOjyamaItemNum + 1;				//加算
+			PlayerPrefs.SetInt("noOjyamaItemNum", saveNoOjyamaItemNum);	//save
+			Debug.Log("NoOjyama item : " + PlayerPrefs.GetInt("noOjyamaItemNum"));
+			Debug.Log("item 5 buy : " + itemPoint[4]);
+		}else{
+			Debug.Log("don't buy");
+		}
 	}
 	//shop item用のbutton制御関数
 	public void ButtonClicked_Item6(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		tempSave = tempSave - itemPoint[5];
-		PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
-		Debug.Log("item 6 buy : " + itemPoint[5]);
+		if(tempSave > itemPoint[5]){
+			tempSave = tempSave - itemPoint[5];
+			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
+			Debug.Log("item 6 buy : " + itemPoint[5]);
+		}else{
+			Debug.Log("don't buy");
+		}
 	}
 }
