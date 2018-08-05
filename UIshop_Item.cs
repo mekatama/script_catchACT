@@ -9,6 +9,8 @@ public class UIshop_Item : MonoBehaviour {
 	public Text[] itemNameText;		//Textコンポーネント取得用
 	public int[] itemPoint;			//Itemの価格
 	public Text[] itemPointText;	//Textコンポーネント取得用
+	public int[] itemNum;			//Itemの所持個数
+	public Text[] itemNumText;		//Textコンポーネント取得用
 	private float savePlayerSpeedItem;	//saveデータ一時保存用
 	private int savePlayerSpeedItemNum;	//saveデータ一時保存用
 	private int saveKagoScaleItemNum;	//saveデータ一時保存用
@@ -33,12 +35,17 @@ public class UIshop_Item : MonoBehaviour {
 			itemNameText[i].text = itemName[i];
 			itemPointText[i].text = itemPoint[i].ToString("000");
 		}
+		itemNumText[0].text = savePlayerSpeedItemNum.ToString("000");
+		itemNumText[1].text = saveKagoScaleItemNum.ToString("000");
+		itemNumText[2].text = savePointUpItemNum.ToString("000");
+		itemNumText[3].text = saveTimeExtendItemNum.ToString("000");
+		itemNumText[4].text = saveNoOjyamaItemNum.ToString("000");
 	}
 
 	//speedUp item用のbutton制御関数
 	public void ButtonClicked_Item1(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		if(tempSave > itemPoint[0]){
+		if(tempSave >= itemPoint[0]){
 			tempSave = tempSave - itemPoint[0];
 			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 			//強化内容
@@ -55,7 +62,7 @@ public class UIshop_Item : MonoBehaviour {
 	//籠大きくする item用のbutton制御関数
 	public void ButtonClicked_Item2(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		if(tempSave > itemPoint[1]){
+		if(tempSave >= itemPoint[1]){
 			tempSave = tempSave - itemPoint[1];
 			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 			//強化内容
@@ -70,7 +77,7 @@ public class UIshop_Item : MonoBehaviour {
 	//pointUp item用のbutton制御関数
 	public void ButtonClicked_Item3(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		if(tempSave > itemPoint[2]){
+		if(tempSave >= itemPoint[2]){
 			tempSave = tempSave - itemPoint[2];
 			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 			//強化内容
@@ -85,7 +92,7 @@ public class UIshop_Item : MonoBehaviour {
 	//時間延長 item用のbutton制御関数
 	public void ButtonClicked_Item4(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		if(tempSave > itemPoint[3]){
+		if(tempSave >= itemPoint[3]){
 			tempSave = tempSave - itemPoint[3];
 			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 			//強化内容
@@ -100,7 +107,7 @@ public class UIshop_Item : MonoBehaviour {
 	//NoOjyama item用のbutton制御関数
 	public void ButtonClicked_Item5(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		if(tempSave > itemPoint[4]){
+		if(tempSave >= itemPoint[4]){
 			tempSave = tempSave - itemPoint[4];
 			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 			//強化内容
@@ -115,7 +122,7 @@ public class UIshop_Item : MonoBehaviour {
 	//shop item用のbutton制御関数
 	public void ButtonClicked_Item6(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
-		if(tempSave > itemPoint[5]){
+		if(tempSave >= itemPoint[5]){
 			tempSave = tempSave - itemPoint[5];
 			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 			Debug.Log("item 6 buy : " + itemPoint[5]);
