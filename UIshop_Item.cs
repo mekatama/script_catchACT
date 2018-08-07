@@ -19,6 +19,11 @@ public class UIshop_Item : MonoBehaviour {
 	private int saveNoOjyamaItemNum;	//saveデータ一時保存用
 	public float itemSpeed;				//アイテムのspeedUp値
 
+	public Canvas noPointCamvas;		//UI noPoint
+	public float timeOut;				//NoPointを消したい時間間隔
+	private float timeElapsed;			//時間を仮に格納する変数
+	private bool isNoPoint;				//UI flag
+
 	void Start () {
 		//saveがなかったら０を入れて初期化
 		savePlayerSpeedItem = PlayerPrefs.GetFloat("playerSpeedItem", 0); 	
@@ -27,6 +32,8 @@ public class UIshop_Item : MonoBehaviour {
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
 		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
 		saveNoOjyamaItemNum = PlayerPrefs.GetInt("noOjyamaItemNum", 0); 
+		isNoPoint = false;
+		noPointCamvas.enabled = false;	//UI非表示
 	}
 
 	void Update () {
@@ -40,6 +47,16 @@ public class UIshop_Item : MonoBehaviour {
 		itemNumText[2].text = savePointUpItemNum.ToString("000");
 		itemNumText[3].text = saveTimeExtendItemNum.ToString("000");
 		itemNumText[4].text = saveNoOjyamaItemNum.ToString("000");
+
+		//NoPoint用時間チェック
+		if(isNoPoint == true){
+			timeElapsed += Time.deltaTime;		//経過時間の保存
+			if(timeElapsed >= timeOut) {		//指定した経過時間に達したら
+				isNoPoint = false;
+				timeElapsed = 0;
+				NoPoint();
+			}
+		}
 	}
 
 	//speedUp item用のbutton制御関数
@@ -56,7 +73,8 @@ public class UIshop_Item : MonoBehaviour {
 			Debug.Log("speed item : " + PlayerPrefs.GetInt("playerSpeedItemNum"));
 			Debug.Log("item 1 buy : " + itemPoint[0]);
 		}else{
-			Debug.Log("don't buy");
+			isNoPoint = true;
+			NoPoint();
 		}
 	}
 	//籠大きくする item用のbutton制御関数
@@ -71,7 +89,8 @@ public class UIshop_Item : MonoBehaviour {
 			Debug.Log("scale item : " + PlayerPrefs.GetInt("kagoScaleItemNum"));
 			Debug.Log("item 2 buy : " + itemPoint[1]);
 		}else{
-			Debug.Log("don't buy");
+			isNoPoint = true;
+			NoPoint();
 		}
 	}
 	//pointUp item用のbutton制御関数
@@ -86,7 +105,8 @@ public class UIshop_Item : MonoBehaviour {
 			Debug.Log("point item : " + PlayerPrefs.GetInt("pointUpItemNum"));
 			Debug.Log("item 3 buy : " + itemPoint[2]);
 		}else{
-			Debug.Log("don't buy");
+			isNoPoint = true;
+			NoPoint();
 		}
 	}
 	//時間延長 item用のbutton制御関数
@@ -101,7 +121,8 @@ public class UIshop_Item : MonoBehaviour {
 			Debug.Log("timeextend item : " + PlayerPrefs.GetInt("timeExtendItemNum"));
 			Debug.Log("item 4 buy : " + itemPoint[3]);
 		}else{
-			Debug.Log("don't buy");
+			isNoPoint = true;
+			NoPoint();
 		}
 	}
 	//NoOjyama item用のbutton制御関数
@@ -116,7 +137,8 @@ public class UIshop_Item : MonoBehaviour {
 			Debug.Log("NoOjyama item : " + PlayerPrefs.GetInt("noOjyamaItemNum"));
 			Debug.Log("item 5 buy : " + itemPoint[4]);
 		}else{
-			Debug.Log("don't buy");
+			isNoPoint = true;
+			NoPoint();
 		}
 	}
 	//shop item用のbutton制御関数
@@ -127,7 +149,16 @@ public class UIshop_Item : MonoBehaviour {
 			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
 			Debug.Log("item 6 buy : " + itemPoint[5]);
 		}else{
-			Debug.Log("don't buy");
+			isNoPoint = true;
+			NoPoint();
+		}
+	}
+
+	void NoPoint(){
+		if(isNoPoint){
+			noPointCamvas.enabled = true;	//UI表示
+		}else{
+			noPointCamvas.enabled = false;	//UI非表示
 		}
 	}
 }
