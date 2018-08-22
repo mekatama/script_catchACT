@@ -11,10 +11,12 @@ public class GameController : MonoBehaviour {
 	public float timeCount;			//制限時間
 	public bool isTimeCount;
 	public bool isClear;
+	public bool isGameOver;			//GameOver flag
 
 	public Canvas itemSelectCamvas;	//UI itemSelect
 	public Canvas inGameCamvas;		//UI inGame
 	public Canvas clearCamvas;		//UI clear
+	public Canvas gameOverCamvas;	//UI GameOver
 	public Canvas item0Camvas;		//UI item0 speedup
 	public Canvas item1Camvas;		//UI item1 speedup
 	public Canvas item2Camvas;		//UI item2 speedup
@@ -49,6 +51,7 @@ public class GameController : MonoBehaviour {
 		Play,		//inGame
 		Clear,		//
 		Result,		//
+		GameOver,
 		AllClear	//
 	}
 	State state;
@@ -65,6 +68,7 @@ public class GameController : MonoBehaviour {
 		//
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
+		isGameOver = false;		//初期化
 		tempItem0zero = false;	//初期化
 		tempItem1zero = false;	//初期化
 		tempItem2zero = false;	//初期化
@@ -73,6 +77,7 @@ public class GameController : MonoBehaviour {
 
 		inGameCamvas.enabled = false;	//UI非表示
 		clearCamvas.enabled = false;	//UI非表示
+		gameOverCamvas.enabled = false;	//UI非表示
 		item0Camvas.enabled = false;	//UI非表示
 		item1Camvas.enabled = false;	//UI非表示
 		item2Camvas.enabled = false;	//UI非表示
@@ -91,12 +96,18 @@ public class GameController : MonoBehaviour {
 				inGameCamvas.enabled = true;		//UI表示
 				itemSelectCamvas.enabled = false;	//UI非表示
 				isTimeCount = true;
-			//time判定
-			if(timeCount <= 0){
-				timeCount = 0;
-				isTimeCount = false;
-				Clear();							//ステート変更
-			}
+				Debug.Log("isGameOver:" + isGameOver);
+				//GameOver判定
+				if(isGameOver){
+					GameOver();
+				}
+
+				//time判定
+				if(timeCount <= 0){
+					timeCount = 0;
+					isTimeCount = false;
+//					Clear();							//ステート変更
+				}
 				break;
 			//
 			case State.Clear:
@@ -110,6 +121,11 @@ public class GameController : MonoBehaviour {
 				break;
 			//
 			case State.Result:
+				break;
+			//
+			case State.GameOver:
+				gameOverCamvas.enabled = true;	//UI表示
+				inGameCamvas.enabled = false;	//UI非表示
 				break;
 			//
 			case State.AllClear:
@@ -136,6 +152,9 @@ public class GameController : MonoBehaviour {
 	}
 	void Result(){
 		state = State.Result;
+	}
+	void GameOver(){
+		state = State.GameOver;
 	}
 	void AllClear(){
 		state = State.AllClear;
