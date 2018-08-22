@@ -16,4 +16,16 @@ public class Kago : MonoBehaviour {
 		//kagoの大きさ設定
 		this.transform.localScale = new Vector3(gc.playerKagoScale, 0.1f, 1);
 	}
+
+	//他のオブジェクトとの当たり判定
+	void OnTriggerEnter(Collider other) {
+		if(other.tag == "okasi_toge"){
+			Debug.Log("togetoge");
+			//gcって仮の変数にGameControllerのコンポーネントを入れる
+			GameController gc = gameController.GetComponent<GameController>();
+			gc.isGameOver = true;			
+			//このGameObjectを［Hierrchy］ビューから削除する
+			Destroy(gameObject);
+		}
+	}
 }
