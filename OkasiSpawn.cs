@@ -27,9 +27,9 @@ public class OkasiSpawn : MonoBehaviour {
 		GameController gc = gameController.GetComponent<GameController>();
 		//NoOjyama Item分岐
 		if(gc.playerNoOjyama){
-			okasiType = Random.Range(0, 3);			//(仮)okasiの種類。最終的にgamecontrollで制御
-		}else{
 			okasiType = Random.Range(0, 4);			//(仮)okasiの種類。最終的にgamecontrollで制御
+		}else{
+			okasiType = Random.Range(0, 5);			//(仮)okasiの種類。最終的にgamecontrollで制御
 		}
 		float x_pos = Random.Range(-3.5f,3.5f); //ランダムで出現位置を決める
 
