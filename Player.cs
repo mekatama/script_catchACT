@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 	GameObject gameController;			//検索したオブジェクト入れる用
 	CharacterController characterController;//コンポーネントを入れる用
-//	Animator animator;
+	Animator animator;
 	public float graviy;					//重力値
 	public Vector3 velocity;				//最終的な速度
 	public float moveX = 0f;				//x方向移動用
@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 	void Start () {
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 		characterController = GetComponent<CharacterController>();	//コンポーネントを取得
-//		animator = GetComponent<Animator>();	//コンポーネントを取得
+		animator = GetComponent<Animator>();	//コンポーネントを取得
 		velocity = Vector3.zero;				//0ベクトル
 	}
 	
@@ -35,6 +35,10 @@ public class Player : MonoBehaviour {
 		if(!gc.isClear){
 //			Debug.Log(velocity.x);
 			characterController.Move(velocity * Time.deltaTime);
+		}
+
+		if(gc.isGameOver){
+			animator.SetBool("isGameOver", true);		//animation制御
 		}
 	}
 
