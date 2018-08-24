@@ -22,11 +22,13 @@ public class GameController : MonoBehaviour {
 	public Canvas item2Camvas;		//UI item2 speedup
 	public Canvas item3Camvas;		//UI item3 speedup
 	public Canvas item4Camvas;		//UI item4 speedup
+	public Canvas item5Camvas;		//UI item5 speedup
 	public Toggle toggleItem0;		//toggle
 	public Toggle toggleItem1;		//toggle
 	public Toggle toggleItem2;		//toggle
 	public Toggle toggleItem3;		//toggle
 	public Toggle toggleItem4;		//toggle
+	public Toggle toggleItem5;		//toggle
 
 	private float savePlayerSpeedItem;		//一時保存用
 	private int savePlayerSpeedItemNum;		//一時保存用
@@ -34,16 +36,19 @@ public class GameController : MonoBehaviour {
 	private int savePointUpItemNum;			//一時保存用
 	private int saveTimeExtendItemNum;		//一時保存用
 	private int saveNoOjyamaItemNum;		//一時保存用
+	private int saveShildItemNum;			//一時保存用
 	public float playerSpeedItem;			//shopで購入
 	public float playerKagoScale;			//shopで購入
 	public int playerPointUp;				//shopで購入
 	public float playerTimeExtend;			//shopで購入
 	public bool playerNoOjyama;				//shopで購入
+	public bool playerShild;				//shopで購入
 	private bool tempItem0zero;				//一時保存用
 	private bool tempItem1zero;				//一時保存用
 	private bool tempItem2zero;				//一時保存用
 	private bool tempItem3zero;				//一時保存用
 	private bool tempItem4zero;				//一時保存用
+	private bool tempItem5zero;				//一時保存用
 
 	//ゲームステート
 	enum State{
@@ -65,6 +70,7 @@ public class GameController : MonoBehaviour {
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
 		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
 		saveNoOjyamaItemNum = PlayerPrefs.GetInt("noOjyamaItemNum", 0); 
+		saveShildItemNum = PlayerPrefs.GetInt("shildItemNum", 0); 
 		//
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
@@ -74,6 +80,7 @@ public class GameController : MonoBehaviour {
 		tempItem2zero = false;	//初期化
 		tempItem3zero = false;	//初期化
 		tempItem4zero = false;	//初期化
+		tempItem5zero = false;	//初期化
 
 		inGameCamvas.enabled = false;	//UI非表示
 		clearCamvas.enabled = false;	//UI非表示
@@ -83,6 +90,7 @@ public class GameController : MonoBehaviour {
 		item2Camvas.enabled = false;	//UI非表示
 		item3Camvas.enabled = false;	//UI非表示
 		item4Camvas.enabled = false;	//UI非表示
+		item5Camvas.enabled = false;	//UI非表示
 		ItemSelect();					//初期ステート
 	}
 
@@ -321,5 +329,33 @@ public class GameController : MonoBehaviour {
 		}
 		PlayerPrefs.SetInt("noOjyamaItemNum", saveNoOjyamaItemNum);	//save
 		Debug.Log("NoOjyama item : " + PlayerPrefs.GetInt("noOjyamaItemNum") + " : " + playerNoOjyama);
+	}
+	//Shild item
+	public void ToggleItem5()	{
+		if(saveShildItemNum >= 1){
+			if(toggleItem5.isOn){
+				saveShildItemNum = saveShildItemNum - 1;	//使用で減らす
+				playerShild = true;
+				if(saveShildItemNum == 0){
+					tempItem5zero = true;	//zero制御用
+					item5Camvas.enabled = true;		//UI表示
+				}
+			}else{
+				saveShildItemNum = saveShildItemNum + 1;	//戻す
+				playerShild = false;
+				item5Camvas.enabled = false;	//UI非表示
+			}
+		}else if(saveShildItemNum == 0 && tempItem5zero == true){
+			if(!toggleItem5.isOn){
+				saveShildItemNum = saveShildItemNum + 1;	//戻す
+				playerShild = false;
+				item5Camvas.enabled = false;	//UI非表示
+				tempItem5zero = false;			//zero制御用
+			}
+		}else{
+			Debug.Log("No Item");
+		}
+		PlayerPrefs.SetInt("shildItemNum", saveShildItemNum);	//save
+		Debug.Log("Shild item : " + PlayerPrefs.GetInt("shildItemNum") + " : " + playerShild);
 	}
 }

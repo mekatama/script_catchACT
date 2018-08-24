@@ -14,6 +14,7 @@ public class UI_ItemSelect : MonoBehaviour {
 	private int savePointUpItemNum;		//saveデータ一時保存用
 	private int saveTimeExtendItemNum;	//saveデータ一時保存用
 	private int saveNoOjyamaItemNum;	//saveデータ一時保存用
+	private int saveShildItemNum;		//saveデータ一時保存用
 
 	void Start () {
 		//saveがなかったら０を入れて初期化
@@ -23,6 +24,7 @@ public class UI_ItemSelect : MonoBehaviour {
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
 		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
 		saveNoOjyamaItemNum = PlayerPrefs.GetInt("noOjyamaItemNum", 0); 
+		saveShildItemNum = PlayerPrefs.GetInt("shildItemNum", 0); 
 	}
 	
 	void Update () {
@@ -31,6 +33,7 @@ public class UI_ItemSelect : MonoBehaviour {
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
 		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
 		saveNoOjyamaItemNum = PlayerPrefs.GetInt("noOjyamaItemNum", 0); 
+		saveShildItemNum = PlayerPrefs.GetInt("shildItemNum", 0); 
 		//アイテム名と個数の表示
 		for(int i = 0; i < itemName.Length; i++) {
 			itemNameText[i].text = itemName[i];
@@ -39,6 +42,7 @@ public class UI_ItemSelect : MonoBehaviour {
 			itemNumText[2].text = savePointUpItemNum.ToString("000");
 			itemNumText[3].text = saveTimeExtendItemNum.ToString("000");
 			itemNumText[4].text = saveNoOjyamaItemNum.ToString("000");
+			itemNumText[5].text = saveShildItemNum.ToString("000");
 //			itemNumText[i].text = itemNum[i].ToString("000");
 		}
 	}

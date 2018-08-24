@@ -17,6 +17,7 @@ public class UIshop_Item : MonoBehaviour {
 	private int savePointUpItemNum;		//saveデータ一時保存用
 	private int saveTimeExtendItemNum;	//saveデータ一時保存用
 	private int saveNoOjyamaItemNum;	//saveデータ一時保存用
+	private int saveShildItemNum;		//saveデータ一時保存用
 	public float itemSpeed;				//アイテムのspeedUp値
 
 	public Canvas noPointCamvas;		//UI noPoint
@@ -32,6 +33,7 @@ public class UIshop_Item : MonoBehaviour {
 		savePointUpItemNum = PlayerPrefs.GetInt("pointUpItemNum", 0); 
 		saveTimeExtendItemNum = PlayerPrefs.GetInt("timeExtendItemNum", 0); 
 		saveNoOjyamaItemNum = PlayerPrefs.GetInt("noOjyamaItemNum", 0); 
+		saveShildItemNum = PlayerPrefs.GetInt("shildItemNum", 0); 
 		isNoPoint = false;
 		noPointCamvas.enabled = false;	//UI非表示
 	}
@@ -47,6 +49,7 @@ public class UIshop_Item : MonoBehaviour {
 		itemNumText[2].text = savePointUpItemNum.ToString("000");
 		itemNumText[3].text = saveTimeExtendItemNum.ToString("000");
 		itemNumText[4].text = saveNoOjyamaItemNum.ToString("000");
+		itemNumText[5].text = saveShildItemNum.ToString("000");
 
 		//NoPoint用時間チェック
 		if(isNoPoint == true){
@@ -141,12 +144,16 @@ public class UIshop_Item : MonoBehaviour {
 			NoPoint();
 		}
 	}
-	//shop item用のbutton制御関数
+	//shild item用のbutton制御関数
 	public void ButtonClicked_Item6(){
 		tempSave = PlayerPrefs.GetInt("totalOkasi");
 		if(tempSave >= itemPoint[5]){
 			tempSave = tempSave - itemPoint[5];
 			PlayerPrefs.SetInt("totalOkasi", tempSave);	//save
+			//強化内容
+			saveShildItemNum = saveShildItemNum + 1;				//加算
+			PlayerPrefs.SetInt("shildItemNum", saveShildItemNum);	//save
+			Debug.Log("Shild item : " + PlayerPrefs.GetInt("shildItemNum"));
 			Debug.Log("item 6 buy : " + itemPoint[5]);
 		}else{
 			isNoPoint = true;
