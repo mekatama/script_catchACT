@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
 	public bool isTimeCount;
 	public bool isClear;
 	public bool isGameOver;			//GameOver flag
+	public int shildHp;
 
 	public Canvas itemSelectCamvas;	//UI itemSelect
 	public Canvas inGameCamvas;		//UI inGame
@@ -72,6 +73,7 @@ public class GameController : MonoBehaviour {
 		saveNoOjyamaItemNum = PlayerPrefs.GetInt("noOjyamaItemNum", 0); 
 		saveShildItemNum = PlayerPrefs.GetInt("shildItemNum", 0); 
 		//
+		shildHp = 2;			//初期化
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
 		isGameOver = false;		//初期化
