@@ -20,12 +20,16 @@ public class Kago : MonoBehaviour {
 	//他のオブジェクトとの当たり判定
 	void OnTriggerEnter(Collider other) {
 		if(other.tag == "okasi_toge"){
-			Debug.Log("togetoge");
 			//gcって仮の変数にGameControllerのコンポーネントを入れる
 			GameController gc = gameController.GetComponent<GameController>();
-			gc.isGameOver = true;			
-			//このGameObjectを［Hierrchy］ビューから削除する
-			Destroy(gameObject);
+			if(gc.shildHp > 0){
+				gc.shildHp -= 1;
+			}else if(gc.shildHp == 0){
+				gc.isGameOver = true;			
+				//このGameObjectを［Hierrchy］ビューから削除する
+				Destroy(gameObject);
+			}
+			Debug.Log("shildHP = " + gc.shildHp);
 		}
 	}
 }
