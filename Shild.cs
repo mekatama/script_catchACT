@@ -16,5 +16,12 @@ public class Shild : MonoBehaviour {
 		if(gc.shildHp == shildDel){
 				Destroy(gameObject);	//shild obj消す
 		}
+
+		//表示on/off
+		if(gc.playerShild){
+			this.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+		}else{
+			this.transform.localScale = new Vector3(0, 0, 0);
+		}
 	}
 }
