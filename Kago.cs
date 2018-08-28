@@ -22,9 +22,15 @@ public class Kago : MonoBehaviour {
 		if(other.tag == "okasi_toge"){
 			//gcって仮の変数にGameControllerのコンポーネントを入れる
 			GameController gc = gameController.GetComponent<GameController>();
-			if(gc.shildHp > 0){
-				gc.shildHp -= 1;
-			}else if(gc.shildHp == 0){
+			if(gc.playerShild){
+				if(gc.shildHp > 0){
+					gc.shildHp -= 1;
+				}else if(gc.shildHp == 0){
+					gc.isGameOver = true;			
+					//このGameObjectを［Hierrchy］ビューから削除する
+					Destroy(gameObject);
+				}
+			}else{
 				gc.isGameOver = true;			
 				//このGameObjectを［Hierrchy］ビューから削除する
 				Destroy(gameObject);
