@@ -6,7 +6,6 @@ public class Okasi : MonoBehaviour {
 	public int okasiScore;				//okasiスコア
 	public float okasiSpeed = -0.05f;	//1秒間に弾が進む距離
 	GameObject gameController;			//検索したオブジェクト入れる用
-//	GameObject player;					//検索したオブジェクト入れる用
 	public Rigidbody rb;
 	private bool hasiR;
 	private bool hasiL;
@@ -31,9 +30,12 @@ public class Okasi : MonoBehaviour {
 	}
 
 	void Update() {
+		//gcって仮の変数にGameControllerのコンポーネントを入れる
+		GameController gc = gameController.GetComponent<GameController>();
+		//籠の端に当たらな場合
 		if(!hasiR || !hasiL){
 			//移動量
-			this.transform.position += new Vector3 (0, okasiSpeed, 0);
+			this.transform.position += new Vector3 (0, gc.okasiSpeedMaster, 0);
 		}
 	}
 
@@ -61,12 +63,12 @@ public class Okasi : MonoBehaviour {
 		}
 		if(other.tag == "kago_hasi"){
 			yForce = Random.Range(30, 40);	//randomで軌道に変化出したい
-			Debug.Log("hasiR : " + yForce);
+//			Debug.Log("hasiR : " + yForce);
 			hasiR = true;
 		}
 		if(other.tag == "kago_hasi2"){
 			yForce = Random.Range(30, 40);	//randomで軌道に変化出したい
-			Debug.Log("hasiL : " + yForce);
+//			Debug.Log("hasiL : " + yForce);
 			hasiL = true;
 		}
 	}

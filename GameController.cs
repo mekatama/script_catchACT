@@ -12,7 +12,10 @@ public class GameController : MonoBehaviour {
 	public bool isTimeCount;
 	public bool isClear;
 	public bool isGameOver;			//GameOver flag
-	public int shildHp;
+	public int shildHp;				//ShildHP
+	public float okasiSpeedMaster;	//全てのお菓子用1秒間に弾が進む距離
+	public float editOkasiSpeed;
+	private bool isSpeedUp;					//speedUP一回だけ処理
 
 	public Canvas itemSelectCamvas;	//UI itemSelect
 	public Canvas inGameCamvas;		//UI inGame
@@ -106,7 +109,7 @@ public class GameController : MonoBehaviour {
 				inGameCamvas.enabled = true;		//UI表示
 				itemSelectCamvas.enabled = false;	//UI非表示
 				isTimeCount = true;
-				Debug.Log("isGameOver:" + isGameOver);
+//				Debug.Log("isGameOver:" + isGameOver);
 				//GameOver判定
 				if(isGameOver){
 					GameOver();
@@ -147,6 +150,19 @@ public class GameController : MonoBehaviour {
 		//timeカウント(clearで停止)
 		if(isTimeCount){
 			timeCount -= Time.deltaTime;	//play時間の保存
+		}
+
+		//お菓子SpeedUP処理
+		//10個catch毎に落下速度が速くなる
+		if((totalCatch % 10) == 0 && totalCatch > 0){
+			if(isSpeedUp == false){
+//				okasiSpeedMaster -= 0.05f;
+				okasiSpeedMaster -= editOkasiSpeed;
+				isSpeedUp = true;
+				Debug.Log("SpeedUp");
+			}
+		}else{
+			isSpeedUp = false;
 		}
 	}
 
