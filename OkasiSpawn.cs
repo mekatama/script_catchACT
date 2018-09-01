@@ -8,13 +8,30 @@ public class OkasiSpawn : MonoBehaviour {
 	public float timeOut;				//okasiを出現させたい時間間隔
 	private float timeElapsed;			//時間を仮に格納する変数
 	private int okasiType;				//okasiの種類
+	private bool isTime;				//
 
 	void Start () {
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 		okasiType = 0;							//(仮)okasiの種類
+		isTime = false;
 	}
 
 	void Update () {
+		//gcって仮の変数にGameControllerのコンポーネントを入れる
+		GameController gc = gameController.GetComponent<GameController>();
+		//10個catch毎にスポーン時間を短くする
+		if((gc.totalCatch % 10) == 0){
+			if(isTime == false){
+				if(timeOut > 0.05f){
+					timeOut -= 0.02f;
+					isTime = true;
+//					Debug.Log("SpeedUp");
+				}
+			}
+		}else{
+			isTime = false;
+		}
+
 		//時間チェック
 		timeElapsed += Time.deltaTime;	//経過時間の保存
         if(timeElapsed >= timeOut) {	//指定した経過時間に達したら
