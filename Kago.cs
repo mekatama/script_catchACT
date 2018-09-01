@@ -35,7 +35,7 @@ public class Kago : MonoBehaviour {
 				//このGameObjectを［Hierrchy］ビューから削除する
 				Destroy(gameObject);
 			}
-			Debug.Log("shildHP = " + gc.shildHp);
+//			Debug.Log("shildHP = " + gc.shildHp);
 		}
 	}
 }
