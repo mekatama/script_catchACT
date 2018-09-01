@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Kago : MonoBehaviour {
 	GameObject gameController;			//検索したオブジェクト入れる用
+	private bool isScale;
 
 	void Start () {
+		isScale = false;
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 	}
 	
 	void Update () {
 		//gcって仮の変数にGameControllerのコンポーネントを入れる
 		GameController gc = gameController.GetComponent<GameController>();
-		Debug.Log("kago scale : " + gc.playerKagoScale);
-		//kagoの大きさ設定
-		this.transform.localScale = new Vector3(gc.playerKagoScale, 0.1f, 1);
+		if(gc.playerKagoScale > 1.0f){
+		if(isScale == false){
+			Debug.Log("kago scale : " + gc.playerKagoScale);
+			//kagoの大きさ設定
+			this.transform.localScale = new Vector3(gc.playerKagoScale, 0.1f, 1);
+			isScale = true;
+		}
+		}
 	}
 
 	//他のオブジェクトとの当たり判定
