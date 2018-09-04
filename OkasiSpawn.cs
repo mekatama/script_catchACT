@@ -9,11 +9,13 @@ public class OkasiSpawn : MonoBehaviour {
 	private float timeElapsed;			//時間を仮に格納する変数
 	private int okasiType;				//okasiの種類
 	private bool isTime;				//
+	public GameObject okasi;
 
 	void Start () {
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 		okasiType = 0;							//(仮)okasiの種類
 		isTime = false;
+		okasi = null;
 	}
 
 	void Update () {
@@ -24,9 +26,7 @@ public class OkasiSpawn : MonoBehaviour {
 			if(isTime == false){
 				if(timeOut > 0.03f){
 					timeOut -= gc.editOkasiSpawn;
-//					timeOut -= 0.02f;
 					isTime = true;
-//					Debug.Log("SpeedUp");
 				}
 			}
 		}else{
@@ -54,7 +54,8 @@ public class OkasiSpawn : MonoBehaviour {
 		if(gc.isTimeCount){
 			if(!gc.isClear){
 				//okasiを生成する
-				GameObject okasi = (GameObject)Instantiate(
+				okasi = (GameObject)Instantiate(
+//				GameObject okasi = (GameObject)Instantiate(
 					okasiObject[okasiType],						//■仮で0を入れている。0～4を想定
 					new Vector3(x_pos, transform.position.y, transform.position.z),
 					transform.rotation
