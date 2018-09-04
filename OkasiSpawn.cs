@@ -22,8 +22,9 @@ public class OkasiSpawn : MonoBehaviour {
 		//10個catch毎にスポーン時間を短くする
 		if((gc.totalCatch % 10) == 0){
 			if(isTime == false){
-				if(timeOut > 0.05f){
-					timeOut -= 0.02f;
+				if(timeOut > 0.03f){
+					timeOut -= gc.editOkasiSpawn;
+//					timeOut -= 0.02f;
 					isTime = true;
 //					Debug.Log("SpeedUp");
 				}

@@ -14,8 +14,9 @@ public class GameController : MonoBehaviour {
 	public bool isGameOver;			//GameOver flag
 	public int shildHp;				//ShildHP
 	public float okasiSpeedMaster;	//全てのお菓子用1秒間に弾が進む距離
-	public float editOkasiSpeed;
-	private bool isSpeedUp;					//speedUP一回だけ処理
+	public float editOkasiSpawn;	//調整パラメーター
+	public float editOkasiSpeed;	//調整パラメーター
+	private bool isSpeedUp;			//speedUP一回だけ処理
 
 	public Canvas itemSelectCamvas;	//UI itemSelect
 	public Canvas inGameCamvas;		//UI inGame
