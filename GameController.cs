@@ -120,7 +120,7 @@ public class GameController : MonoBehaviour {
 				if(timeCount <= 0){
 					timeCount = 0;
 					isTimeCount = false;
-//					Clear();							//ステート変更
+					Clear();							//ステート変更
 				}
 				break;
 			//
