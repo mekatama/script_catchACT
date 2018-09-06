@@ -25,6 +25,10 @@ public class UIshop_Item : MonoBehaviour {
 	private float timeElapsed;			//時間を仮に格納する変数
 	private bool isNoPoint;				//UI flag
 
+	AudioSource audioSource;			//AudioSourceコンポーネント取得用
+	public AudioClip audioClipBuy;		//Buy SE
+	public AudioClip audioClipNoCoin;	//NoCoin SE
+
 	void Start () {
 		//saveがなかったら０を入れて初期化
 		savePlayerSpeedItem = PlayerPrefs.GetFloat("playerSpeedItem", 0); 	
@@ -36,6 +40,8 @@ public class UIshop_Item : MonoBehaviour {
 		saveShildItemNum = PlayerPrefs.GetInt("shildItemNum", 0); 
 		isNoPoint = false;
 		noPointCamvas.enabled = false;	//UI非表示
+
+		audioSource = gameObject.GetComponent<AudioSource>();		//AudioSourceコンポーネント取得
 	}
 
 	void Update () {
@@ -75,8 +81,14 @@ public class UIshop_Item : MonoBehaviour {
 			PlayerPrefs.SetFloat("playerSpeedItem", savePlayerSpeedItem);		//save
 			Debug.Log("speed item : " + PlayerPrefs.GetInt("playerSpeedItemNum"));
 			Debug.Log("item 1 buy : " + itemPoint[0]);
+			//SE再生
+			audioSource.clip = audioClipBuy;	//SE決定
+			audioSource.Play ();				//SE再生
 		}else{
 			isNoPoint = true;
+			//SE再生
+			audioSource.clip = audioClipNoCoin;	//SE決定
+			audioSource.Play ();				//SE再生
 			NoPoint();
 		}
 	}
@@ -91,8 +103,14 @@ public class UIshop_Item : MonoBehaviour {
 			PlayerPrefs.SetInt("kagoScaleItemNum", saveKagoScaleItemNum);	//save
 			Debug.Log("scale item : " + PlayerPrefs.GetInt("kagoScaleItemNum"));
 			Debug.Log("item 2 buy : " + itemPoint[1]);
+			//SE再生
+			audioSource.clip = audioClipBuy;	//SE決定
+			audioSource.Play ();				//SE再生
 		}else{
 			isNoPoint = true;
+			//SE再生
+			audioSource.clip = audioClipNoCoin;	//SE決定
+			audioSource.Play ();				//SE再生
 			NoPoint();
 		}
 	}
@@ -107,8 +125,14 @@ public class UIshop_Item : MonoBehaviour {
 			PlayerPrefs.SetInt("pointUpItemNum", savePointUpItemNum);	//save
 			Debug.Log("point item : " + PlayerPrefs.GetInt("pointUpItemNum"));
 			Debug.Log("item 3 buy : " + itemPoint[2]);
+			//SE再生
+			audioSource.clip = audioClipBuy;	//SE決定
+			audioSource.Play ();				//SE再生
 		}else{
 			isNoPoint = true;
+			//SE再生
+			audioSource.clip = audioClipNoCoin;	//SE決定
+			audioSource.Play ();				//SE再生
 			NoPoint();
 		}
 	}
@@ -123,8 +147,14 @@ public class UIshop_Item : MonoBehaviour {
 			PlayerPrefs.SetInt("timeExtendItemNum", saveTimeExtendItemNum);	//save
 			Debug.Log("timeextend item : " + PlayerPrefs.GetInt("timeExtendItemNum"));
 			Debug.Log("item 4 buy : " + itemPoint[3]);
+			//SE再生
+			audioSource.clip = audioClipBuy;	//SE決定
+			audioSource.Play ();				//SE再生
 		}else{
 			isNoPoint = true;
+			//SE再生
+			audioSource.clip = audioClipNoCoin;	//SE決定
+			audioSource.Play ();				//SE再生
 			NoPoint();
 		}
 	}
@@ -139,8 +169,14 @@ public class UIshop_Item : MonoBehaviour {
 			PlayerPrefs.SetInt("noOjyamaItemNum", saveNoOjyamaItemNum);	//save
 			Debug.Log("NoOjyama item : " + PlayerPrefs.GetInt("noOjyamaItemNum"));
 			Debug.Log("item 5 buy : " + itemPoint[4]);
+			//SE再生
+			audioSource.clip = audioClipBuy;	//SE決定
+			audioSource.Play ();				//SE再生
 		}else{
 			isNoPoint = true;
+			//SE再生
+			audioSource.clip = audioClipNoCoin;	//SE決定
+			audioSource.Play ();				//SE再生
 			NoPoint();
 		}
 	}
@@ -155,8 +191,14 @@ public class UIshop_Item : MonoBehaviour {
 			PlayerPrefs.SetInt("shildItemNum", saveShildItemNum);	//save
 			Debug.Log("Shild item : " + PlayerPrefs.GetInt("shildItemNum"));
 			Debug.Log("item 6 buy : " + itemPoint[5]);
+			//SE再生
+			audioSource.clip = audioClipBuy;	//SE決定
+			audioSource.Play ();				//SE再生
 		}else{
 			isNoPoint = true;
+			//SE再生
+			audioSource.clip = audioClipNoCoin;	//SE決定
+			audioSource.Play ();				//SE再生
 			NoPoint();
 		}
 	}
