@@ -55,6 +55,12 @@ public class GameController : MonoBehaviour {
 	private bool tempItem4zero;				//一時保存用
 	private bool tempItem5zero;				//一時保存用
 
+	AudioSource audioSource;			//AudioSourceコンポーネント取得用
+	public AudioClip audioClipSelect;	//Item Select SE
+	public AudioClip audioClipDead;		//Dead SE
+	public AudioClip audioClipClear;	//Clear SE
+	public AudioClip audioClipBGM;		//BGM
+
 	//ゲームステート
 	enum State{
 		ItemSelect,	//
@@ -98,6 +104,12 @@ public class GameController : MonoBehaviour {
 		item4Camvas.enabled = false;	//UI非表示
 		item5Camvas.enabled = false;	//UI非表示
 		ItemSelect();					//初期ステート
+		audioSource = gameObject.GetComponent<AudioSource>();		//AudioSourceコンポーネント取得
+
+		//BGM再生
+		audioSource.loop = true;			//loop設定on
+		audioSource.clip = audioClipBGM;	//SE決定
+		audioSource.Play ();				//SE再生
 	}
 
 	void LateUpdate () {
@@ -111,8 +123,12 @@ public class GameController : MonoBehaviour {
 				itemSelectCamvas.enabled = false;	//UI非表示
 				isTimeCount = true;
 //				Debug.Log("isGameOver:" + isGameOver);
+
 				//GameOver判定
 				if(isGameOver){
+					//SE再生
+					audioSource.clip = audioClipDead;	//SE決定
+					audioSource.Play ();				//SE再生
 					GameOver();
 				}
 
@@ -120,6 +136,9 @@ public class GameController : MonoBehaviour {
 				if(timeCount <= 0){
 					timeCount = 0;
 					isTimeCount = false;
+					//SE再生
+					audioSource.clip = audioClipClear;	//SE決定
+					audioSource.Play ();				//SE再生
 					Clear();							//ステート変更
 				}
 				break;
@@ -215,6 +234,9 @@ public class GameController : MonoBehaviour {
 					tempItem0zero = true;	//zero制御用
 					item0Camvas.enabled = true;		//UI表示
 				}
+				//SE再生
+				audioSource.clip = audioClipSelect;	//SE決定
+				audioSource.Play ();				//SE再生
 			}else{
 				savePlayerSpeedItemNum = savePlayerSpeedItemNum + 1;	//戻す
 				playerSpeedItem = 0.0f;
@@ -244,6 +266,9 @@ public class GameController : MonoBehaviour {
 					tempItem1zero = true;	//zero制御用
 					item1Camvas.enabled = true;		//UI表示
 				}
+				//SE再生
+				audioSource.clip = audioClipSelect;	//SE決定
+				audioSource.Play ();				//SE再生
 			}else{
 				saveKagoScaleItemNum = saveKagoScaleItemNum + 1;	//戻す
 				playerKagoScale = 1.0f;
@@ -273,6 +298,9 @@ public class GameController : MonoBehaviour {
 					tempItem2zero = true;	//zero制御用
 					item2Camvas.enabled = true;		//UI表示
 				}
+				//SE再生
+				audioSource.clip = audioClipSelect;	//SE決定
+				audioSource.Play ();				//SE再生
 			}else{
 				savePointUpItemNum = savePointUpItemNum + 1;	//戻す
 				playerPointUp = 1;
@@ -302,6 +330,9 @@ public class GameController : MonoBehaviour {
 					tempItem3zero = true;	//zero制御用
 					item3Camvas.enabled = true;		//UI表示
 				}
+				//SE再生
+				audioSource.clip = audioClipSelect;	//SE決定
+				audioSource.Play ();				//SE再生
 			}else{
 				saveTimeExtendItemNum = saveTimeExtendItemNum + 1;	//戻す
 				playerTimeExtend = 0.0f;
@@ -331,6 +362,9 @@ public class GameController : MonoBehaviour {
 					tempItem4zero = true;	//zero制御用
 					item4Camvas.enabled = true;		//UI表示
 				}
+				//SE再生
+				audioSource.clip = audioClipSelect;	//SE決定
+				audioSource.Play ();				//SE再生
 			}else{
 				saveNoOjyamaItemNum = saveNoOjyamaItemNum + 1;	//戻す
 				playerNoOjyama = false;
@@ -359,6 +393,9 @@ public class GameController : MonoBehaviour {
 					tempItem5zero = true;	//zero制御用
 					item5Camvas.enabled = true;		//UI表示
 				}
+				//SE再生
+				audioSource.clip = audioClipSelect;	//SE決定
+				audioSource.Play ();				//SE再生
 			}else{
 				saveShildItemNum = saveShildItemNum + 1;	//戻す
 				playerShild = false;
