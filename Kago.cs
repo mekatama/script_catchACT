@@ -5,10 +5,13 @@ using UnityEngine;
 public class Kago : MonoBehaviour {
 	GameObject gameController;			//検索したオブジェクト入れる用
 	private bool isScale;
+	AudioSource audioSource;				//AudioSourceコンポーネント取得用
+	public AudioClip audioClipShildBreake;	//ShildBreake SE
 
 	void Start () {
 		isScale = false;
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
+		audioSource = gameObject.GetComponent<AudioSource>();		//AudioSourceコンポーネント取得
 	}
 	
 	void Update () {
@@ -32,6 +35,9 @@ public class Kago : MonoBehaviour {
 			if(gc.playerShild){
 				if(gc.shildHp > 0){
 					gc.shildHp -= 1;
+					//SE再生
+					audioSource.clip = audioClipShildBreake;	//SE決定
+					audioSource.Play ();				//SE再生
 				}else if(gc.shildHp == 0){
 					gc.isGameOver = true;			
 					//このGameObjectを［Hierrchy］ビューから削除する
