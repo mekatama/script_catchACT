@@ -18,12 +18,18 @@ public class Kago : MonoBehaviour {
 		//gcって仮の変数にGameControllerのコンポーネントを入れる
 		GameController gc = gameController.GetComponent<GameController>();
 		if(gc.playerKagoScale > 1.0f){
-		if(isScale == false){
-			Debug.Log("kago scale : " + gc.playerKagoScale);
-			//kagoの大きさ設定
-			this.transform.localScale = new Vector3(gc.playerKagoScale, 0.1f, 1);
-			isScale = true;
-		}
+			if(isScale == false){
+				Debug.Log("kago scale : " + gc.playerKagoScale);
+				//kagoの大きさ設定
+				this.transform.localScale = new Vector3(gc.playerKagoScale, 0.1f, 1);
+				isScale = true;
+			}
+		}else if(gc.playerKagoScale == 1.0f){
+			if(isScale == true){
+				//kagoの大きさ設定
+				this.transform.localScale = new Vector3(gc.playerKagoScale, 0.1f, 1);
+				isScale = false;
+			}
 		}
 	}
 
