@@ -230,9 +230,9 @@ public class GameController : MonoBehaviour {
 			if(toggleItem0.isOn){
 				savePlayerSpeedItemNum = savePlayerSpeedItemNum - 1;	//使用で減らす
 				playerSpeedItem = savePlayerSpeedItem;
+				item0Camvas.enabled = true;		//UI表示
 				if(savePlayerSpeedItemNum == 0){
 					tempItem0zero = true;	//zero制御用
-					item0Camvas.enabled = true;		//UI表示
 				}
 				//SE再生
 				audioSource.clip = audioClipSelect;	//SE決定
@@ -262,9 +262,9 @@ public class GameController : MonoBehaviour {
 			if(toggleItem1.isOn){
 				saveKagoScaleItemNum = saveKagoScaleItemNum - 1;	//使用で減らす
 				playerKagoScale = 2.0f;
+				item1Camvas.enabled = true;		//UI表示
 				if(saveKagoScaleItemNum == 0){
 					tempItem1zero = true;	//zero制御用
-					item1Camvas.enabled = true;		//UI表示
 				}
 				//SE再生
 				audioSource.clip = audioClipSelect;	//SE決定
@@ -294,9 +294,9 @@ public class GameController : MonoBehaviour {
 			if(toggleItem2.isOn){
 				savePointUpItemNum = savePointUpItemNum - 1;	//使用で減らす
 				playerPointUp = 2;
+				item2Camvas.enabled = true;		//UI表示
 				if(savePointUpItemNum == 0){
 					tempItem2zero = true;	//zero制御用
-					item2Camvas.enabled = true;		//UI表示
 				}
 				//SE再生
 				audioSource.clip = audioClipSelect;	//SE決定
@@ -326,9 +326,9 @@ public class GameController : MonoBehaviour {
 			if(toggleItem3.isOn){
 				saveTimeExtendItemNum = saveTimeExtendItemNum - 1;	//使用で減らす
 				playerTimeExtend = 10.0f;
+				item3Camvas.enabled = true;		//UI表示
 				if(saveTimeExtendItemNum == 0){
 					tempItem3zero = true;	//zero制御用
-					item3Camvas.enabled = true;		//UI表示
 				}
 				//SE再生
 				audioSource.clip = audioClipSelect;	//SE決定
@@ -358,9 +358,9 @@ public class GameController : MonoBehaviour {
 			if(toggleItem4.isOn){
 				saveNoOjyamaItemNum = saveNoOjyamaItemNum - 1;	//使用で減らす
 				playerNoOjyama = true;
+				item4Camvas.enabled = true;		//UI表示
 				if(saveNoOjyamaItemNum == 0){
 					tempItem4zero = true;	//zero制御用
-					item4Camvas.enabled = true;		//UI表示
 				}
 				//SE再生
 				audioSource.clip = audioClipSelect;	//SE決定
@@ -389,9 +389,9 @@ public class GameController : MonoBehaviour {
 			if(toggleItem5.isOn){
 				saveShildItemNum = saveShildItemNum - 1;	//使用で減らす
 				playerShild = true;
+				item5Camvas.enabled = true;		//UI表示
 				if(saveShildItemNum == 0){
 					tempItem5zero = true;	//zero制御用
-					item5Camvas.enabled = true;		//UI表示
 				}
 				//SE再生
 				audioSource.clip = audioClipSelect;	//SE決定
