@@ -19,7 +19,7 @@ public class Shild : MonoBehaviour {
 
 		//表示on/off
 		if(gc.playerShild){
-			this.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+			this.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 		}else{
 			this.transform.localScale = new Vector3(0, 0, 0);
 		}
