@@ -34,7 +34,10 @@ public class Player : MonoBehaviour {
 
 		if(!gc.isClear){
 //			Debug.Log(velocity.x);
-			characterController.Move(velocity * Time.deltaTime);
+			//動けるか判定
+			if(gc.isMove){
+				characterController.Move(velocity * Time.deltaTime);
+			}
 		}
 
 		if(gc.isGameOver){
@@ -45,13 +48,19 @@ public class Player : MonoBehaviour {
 	public void moveLeft(){
 		//gcって仮の変数にGameControllerのコンポーネントを入れる
 		GameController gc = gameController.GetComponent<GameController>();
-		velocity.x = (speedX + gc.playerSpeedItem) * -1;	//最終的な速度ベクトルに代入
+		//動けるか判定
+		if(gc.isMove){
+			velocity.x = (speedX + gc.playerSpeedItem) * -1;	//最終的な速度ベクトルに代入
+		}
 	}
 
 	public void moveRight(){
 		//gcって仮の変数にGameControllerのコンポーネントを入れる
 		GameController gc = gameController.GetComponent<GameController>();
-		velocity.x = (speedX + gc.playerSpeedItem);			//最終的な速度ベクトルに代入
+		//動けるか判定
+		if(gc.isMove){
+			velocity.x = (speedX + gc.playerSpeedItem);			//最終的な速度ベクトルに代入
+		}
 	}
 
 	public void moveStop(){
