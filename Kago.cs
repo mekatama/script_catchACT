@@ -7,6 +7,7 @@ public class Kago : MonoBehaviour {
 	private bool isScale;
 	AudioSource audioSource;				//AudioSourceコンポーネント取得用
 	public AudioClip audioClipShildBreake;	//ShildBreake SE
+	public AudioClip audioClipCatch;		//catche SE
 
 	void Start () {
 		isScale = false;
@@ -55,6 +56,14 @@ public class Kago : MonoBehaviour {
 				Destroy(gameObject);
 			}
 //			Debug.Log("shildHP = " + gc.shildHp);
+		}
+		if(other.tag == "okasi"){
+			audioSource.clip = audioClipCatch;	//SE決定
+			audioSource.Play ();				//SE再生
+		}
+		if(other.tag == "okasi_ojya"){
+			audioSource.clip = audioClipCatch;	//SE決定
+			audioSource.Play ();				//SE再生
 		}
 	}
 }

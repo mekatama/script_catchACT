@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
 	public float timeCount;			//制限時間
 	public bool isTimeCount;
 	public bool isClear;
+	public bool isMove;
 	public bool isGameOver;			//GameOver flag
 	public int shildHp;				//ShildHP
 	public float okasiSpeedMaster;	//全てのお菓子用1秒間に弾が進む距離
@@ -59,15 +60,14 @@ public class GameController : MonoBehaviour {
 	public AudioClip audioClipSelect;	//Item Select SE
 	public AudioClip audioClipDead;		//Dead SE
 	public AudioClip audioClipClear;	//Clear SE
-	public AudioClip audioClipBGM;		//BGM
 
 	//ゲームステート
 	enum State{
 		ItemSelect,	//
-		Play,		//inGame
+		Play,		//
 		Clear,		//
 		Result,		//
-		GameOver,
+		GameOver,	//
 		AllClear	//
 	}
 	State state;
@@ -86,6 +86,7 @@ public class GameController : MonoBehaviour {
 		shildHp = 2;			//初期化
 		isTimeCount = false;	//初期化
 		isClear = false;		//初期化
+		isMove = false;		//初期化
 		isGameOver = false;		//初期化
 		tempItem0zero = false;	//初期化
 		tempItem1zero = false;	//初期化
@@ -105,11 +106,6 @@ public class GameController : MonoBehaviour {
 		item5Camvas.enabled = false;	//UI非表示
 		ItemSelect();					//初期ステート
 		audioSource = gameObject.GetComponent<AudioSource>();		//AudioSourceコンポーネント取得
-
-		//BGM再生
-		audioSource.loop = true;			//loop設定on
-		audioSource.clip = audioClipBGM;	//SE決定
-		audioSource.Play ();				//SE再生
 	}
 
 	void LateUpdate () {
@@ -122,6 +118,7 @@ public class GameController : MonoBehaviour {
 				inGameCamvas.enabled = true;		//UI表示
 				itemSelectCamvas.enabled = false;	//UI非表示
 				isTimeCount = true;
+				isMove = true;
 //				Debug.Log("isGameOver:" + isGameOver);
 
 				//GameOver判定
@@ -146,6 +143,7 @@ public class GameController : MonoBehaviour {
 			case State.Clear:
 				clearCamvas.enabled = true;		//UI表示
 				inGameCamvas.enabled = false;	//UI非表示
+				isMove = false;					//動けなくする
 				//一回だけ処理
 				if(!isClear){
 					HighScore();
@@ -159,6 +157,7 @@ public class GameController : MonoBehaviour {
 			case State.GameOver:
 				gameOverCamvas.enabled = true;	//UI表示
 				inGameCamvas.enabled = false;	//UI非表示
+				isMove = false;					//動けなくする
 				break;
 			//
 			case State.AllClear:
