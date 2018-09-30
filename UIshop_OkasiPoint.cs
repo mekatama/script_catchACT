@@ -8,6 +8,6 @@ public class UIshop_OkasiPoint : MonoBehaviour {
 	
 	void Update () {
 		//ショップ用okasipoint表示
-		okasiPointText.text = PlayerPrefs.GetInt("totalOkasi").ToString("000000");
+		okasiPointText.text = PlayerPrefs.GetInt("totalOkasi").ToString("000000" + "p");
 	}
 }

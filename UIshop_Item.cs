@@ -48,7 +48,8 @@ public class UIshop_Item : MonoBehaviour {
 		//値段表示
 		for(int i = 0; i < itemName.Length; i++) {
 			itemNameText[i].text = itemName[i];
-			itemPointText[i].text = itemPoint[i].ToString("000");
+			itemPointText[i].text = itemPoint[i].ToString("00" + "p");
+//			itemPointText[i].text = itemPoint[i].ToString("000");
 		}
 		itemNumText[0].text = savePlayerSpeedItemNum.ToString("000");
 		itemNumText[1].text = saveKagoScaleItemNum.ToString("000");
